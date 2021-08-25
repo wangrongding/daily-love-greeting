@@ -1,10 +1,6 @@
-/* eslint no-console: 0 */
-
 "use strict";
 
 const nodemailer = require("nodemailer");
-const path = require("path");
-const resolve = (dir) => path.join(__dirname, dir);
 
 async function main() {
     // Create a SMTP transporter object
@@ -19,7 +15,7 @@ async function main() {
         auth: {
             user: "fedtop@163.com",
             // 不是邮箱密码，是你设置的smtp授权码
-            pass: "AZIOCYXHWEIELSQI",
+            pass: "",
         },
     });
 

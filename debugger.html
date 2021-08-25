@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div
+            style="
+                background-color: green;
+                width: 300px;
+                height: 300px;
+                color: white;
+                line-height: 300px;
+                text-align: center;
+            "
+        >
+            我是页面内容
+        </div>
+        <script>
+            //================================================================
+            (() => {
+                function doCheck(a) {
+                    if (
+                        window.outerHeight - window.innerHeight > 200 ||
+                        window.outerWidth - window.innerWidth > 200
+                    ) {
+                        // Function("debugger")()
+                        // eval("Function('debugger')()");
+                        // doCheck(++a)
+                        document.body.innerHTML =
+                            "检测到非法调试,请关闭后刷新重试!";
+                    }
+                    setInterval(() => {
+                        debugger;
+                    }, 50);
+                }
+                try {
+                    doCheck(0);
+                } catch (err) {}
+            })();
+            //================================================================
+            /* document.onkeydown = function () {
+            if ((e.ctrlKey) && (e.keyCode == 83)) {
+                alert("CTRL + S 被管理员禁用");
+                return false;
+            }
+        }
+        document.onkeydown = function () {
+            let e = window.event || arguments[0];
+            if (e.keyCode == 123) {
+                alert("F12 被管理员禁用");
+                return false;
+            }
+        }
+        document.oncontextmenu = function () {
+            alert('右键被管理员禁用');
+            return false;
+        } */
+
+            //================================================================
+            /* let ConsoleManager = {
+            onOpen() {
+                document.body.innerHTML = ("检测到非法调试,请关闭后刷新重试!");
+                alert("Console is opened")
+            },
+            onClose() {
+                alert("Console is closed")
+            },
+            init() {
+                let x = document.createElement('div');
+                let isOpening = false, isOpened = false;
+                Object.defineProperty(x, 'id', {
+                    get() {
+                        if (!isOpening) {
+                            this.onOpen();
+                            isOpening = true;
+                        }
+                        isOpened = true;
+                    }
+                });
+                setInterval(() => {
+                    console.log(this);
+                    isOpened = false;
+                    console.info(x);
+                    console.clear();
+                    if (!isOpened && isOpening) {
+                        this.onClose();
+                        isOpening = false;
+                    }
+                }, 1000)
+            }
+        }
+
+        ConsoleManager.onOpen = () => {
+            alert("Console is opened!!!!!")
+        }
+        ConsoleManager.onClose = () => {
+            alert("Console is closed!!!!!")
+        }
+        ConsoleManager.init(); */
+            //================================================================================================
+            /* var element = new Image();
+        Object.defineProperty(element, "id", {
+            get: function () {
+                console.log("debugger start")
+                debugger;
+            },
+        });
+
+        requestAnimationFrame(function check() {
+            console.dir(element);
+            requestAnimationFrame(check);
+        }); */
+            //================================================================================================
+            /* (function () {
+            var re = /x/;
+            var i = 0;
+            console.log(re);
+            re.toString = function () {
+                alert("请关闭控制台");
+                return '第 ' + (++i) + ' 次打开控制台';
+            };
+        })();
+        window.onresize = function () {
+            if ((window.outerHeight - window.innerHeight) > 200 || (window.outerWidth - window.innerWidth) > 200)
+                fuckyou();
+        } */
+        </script>
+    </body>
+</html>

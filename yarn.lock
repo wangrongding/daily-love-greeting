@@ -2,6 +2,18 @@
 # yarn lockfile v1
 
 
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.nlark.com/axios/download/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha1-IlY0gZYvTWvemnbVFu8OXTwJsrg=
+  dependencies:
+    follow-redirects "^1.10.0"
+
+follow-redirects@^1.10.0:
+  version "1.14.2"
+  resolved "https://registry.nlark.com/follow-redirects/download/follow-redirects-1.14.2.tgz?cache=0&sync_timestamp=1629288519293&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ffollow-redirects%2Fdownload%2Ffollow-redirects-1.14.2.tgz#cecb825047c00f5e66b142f90fed4f515dec789b"
+  integrity sha1-zsuCUEfAD15msUL5D+1PUV3seJs=
+
 nodemailer@^6.6.3:
   version "6.6.3"
   resolved "https://registry.nlark.com/nodemailer/download/nodemailer-6.6.3.tgz?cache=0&sync_timestamp=1626258476839&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fnodemailer%2Fdownload%2Fnodemailer-6.6.3.tgz#31fb53dd4d8ae16fc088a65cb9ffa8d928a69b48"
