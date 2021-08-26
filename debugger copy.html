@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<script src="./debugger.js"></script>
+<body>
+    <div>来调试我吧~</div>
+    <style style="display: block" contenteditable>
+        body {
+            background-color: rgb(140, 209, 230);
+        }
+        div {
+            background-color: green;
+            color: white;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            line-height: 300px;
+            text-align: center;
+        }
+    </style>
+</body>
+<script>
+    //================================================================
+
+    /*  let times = 1;
+    var abc = document.createElement("div");
+    Object.defineProperty(abc, `id`, {
+        // 数据劫持
+        get: function () {
+            console.warn(`控制台被打开了`, times);
+            console.error(`控制台被打开了`, times);
+            times++;
+        },
+        // others
+    });
+    console.log(abc); */
+
+    /*  function All() {
+            alert(1);
+            for (var i = 0; i < 10; i++) {
+                funcA(1000);
+            }
+            funcB(10000);
+        }
+
+        function funcA(count) {
+            for (var i = 0; i < count; i++) {}
+        }
+
+        function funcB(count) {
+            for (var i = 0; i < count; i++) {}
+        }
+
+        console.profile("性能分析器");
+        All();
+        console.profileEnd(); */
+    //================================================================
+    /* (() => {
+        function doCheck(a) {
+            if (
+                window.outerHeight - window.innerHeight > 200 ||
+                window.outerWidth - window.innerWidth > 200
+            ) {
+                // Function("debugger")()
+                // eval("Function('debugger')()");
+                // doCheck(++a)
+                document.body.innerHTML = "检测到非法调试,请关闭后刷新重试!";
+            }
+            setInterval(() => {
+                // debugger;
+                Function("debugger")();
+            }, 50);
+        }
+        try {
+            doCheck(0);
+        } catch (err) {}
+    })(); */
+
+    /* 去除无限debugger */
+    /* Function.prototype.__constructor_back = Function.prototype.constructor;
+    Function.prototype.constructor = function () {
+        if (arguments && typeof arguments[0] === "string") {
+            //alert("new function: "+ arguments[0]);
+            if ("debugger" === arguments[0]) {
+                //arguments[0]="console.log(\"anti debugger\");";
+                //arguments[0]=";";
+                return;
+            }
+        }
+        return Function.prototype.__constructor_back.apply(this, arguments);
+    }; */
+    //================================================================
+    /* document.onkeydown = function () {
+            if ((e.ctrlKey) && (e.keyCode == 83)) {
+                alert("CTRL + S 被管理员禁用");
+                return false;
+            }
+        }
+        document.onkeydown = function () {
+            let e = window.event || arguments[0];
+            if (e.keyCode == 123) {
+                alert("F12 被管理员禁用");
+                return false;
+            }
+        }
+        document.oncontextmenu = function () {
+            alert('右键被管理员禁用');
+            return false;
+        } */
+
+    //================================================================
+    /* let ConsoleManager = {
+            onOpen() {
+                document.body.innerHTML = ("检测到非法调试,请关闭后刷新重试!");
+                alert("Console is opened")
+            },
+            onClose() {
+                alert("Console is closed")
+            },
+            init() {
+                let x = document.createElement('div');
+                let isOpening = false, isOpened = false;
+                Object.defineProperty(x, 'id', {
+                    get() {
+                        if (!isOpening) {
+                            this.onOpen();
+                            isOpening = true;
+                        }
+                        isOpened = true;
+                    }
+                });
+                setInterval(() => {
+                    console.log(this);
+                    isOpened = false;
+                    console.info(x);
+                    console.clear();
+                    if (!isOpened && isOpening) {
+                        this.onClose();
+                        isOpening = false;
+                    }
+                }, 1000)
+            }
+        }
+
+        ConsoleManager.onOpen = () => {
+            alert("Console is opened!!!!!")
+        }
+        ConsoleManager.onClose = () => {
+            alert("Console is closed!!!!!")
+        }
+        ConsoleManager.init(); */
+    //================================================================================================
+    /* var element = new Image();
+        Object.defineProperty(element, "id", {
+            get: function () {
+                console.log("debugger start")
+                debugger;
+            },
+        });
+
+        requestAnimationFrame(function check() {
+            console.dir(element);
+            requestAnimationFrame(check);
+        }); */
+    //================================================================================================
+    /* (function () {
+            var re = /x/;
+            var i = 0;
+            console.log(re);
+            re.toString = function () {
+                alert("请关闭控制台");
+                return '第 ' + (++i) + ' 次打开控制台';
+            };
+        })();
+        window.onresize = function () {
+            if ((window.outerHeight - window.innerHeight) > 200 || (window.outerWidth - window.innerWidth) > 200)
+                fuckyou();
+        } */
+</script>

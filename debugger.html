@@ -1,41 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
     </head>
-
     <body>
-        <div
-            style="
+        <div>来调试我吧~</div>
+        <style style="display: block" contenteditable>
+            body {
+                background-color: rgb(140, 209, 230);
+            }
+            div {
                 background-color: green;
+                color: white;
                 width: 300px;
                 height: 300px;
-                color: white;
                 line-height: 300px;
                 text-align: center;
-            "
-        >
-            我是页面内容
-        </div>
-
+                /* margin: 0 auto; */
+            }
+        </style>
+        <!-- <script src="./debugger.js"></script> -->
         <script>
+            console.log(window.outerWidth);
+            console.log(window.innerWidth);
+            (() => {
+                function block() {
+                    if (
+                        window.outerHeight - window.innerHeight > 200 ||
+                        window.outerWidth - window.innerWidth > 200
+                    ) {
+                        document.body.innerHTML =
+                            "检测到非法调试,请关闭后刷新重试!";
+                    }
+                    setInterval(() => {
+                        (function () {
+                            return false;
+                        }
+                            ["constructor"]("debugger")
+                            ["call"]());
+                    }, 50);
+                }
+                try {
+                    block();
+                } catch (err) {}
+            })();
+            /* eval(function(c,g,a,b,d,e){d=String;if(!"".replace(/^/,String)){for(;a--;)e[a]=b[a]||a;b=[function(f){return e[f]}];d=function(){return"\\w+"};a=1}for(;a--;)b[a]&&(c=c.replace(new RegExp("\\b"+d(a)+"\\b","g"),b[a]));return c}('(()=>{1 0(){2(()=>{3("4")()},5)}6{0()}7(8){}})();',9,9,"block function setInterval Function debugger 50 try catch err".split(" "),0,{})); */
+
             //================================================================
 
-            let times = 1;
-            var abc = document.createElement("div");
-            Object.defineProperty(abc, `id`, {
-                // 数据劫持
-                get: function () {
-                    console.warn(`控制台被打开了`, times);
-                    console.error(`控制台被打开了`, times);
-                    times++;
-                },
-                // others
-            });
-            console.log(abc);
+            /*  let times = 1;
+    var abc = document.createElement("div");
+    Object.defineProperty(abc, `id`, {
+        // 数据劫持
+        get: function () {
+            console.warn(`控制台被打开了`, times);
+            console.error(`控制台被打开了`, times);
+            times++;
+        },
+        // others
+    });
+    console.log(abc); */
 
             /*  function All() {
             alert(1);
@@ -56,28 +83,43 @@
         console.profile("性能分析器");
         All();
         console.profileEnd(); */
-            /*  //================================================================
-        (() => {
-            function doCheck(a) {
-                if (
-                    window.outerHeight - window.innerHeight > 200 ||
-                    window.outerWidth - window.innerWidth > 200
-                ) {
-                    // Function("debugger")()
-                    // eval("Function('debugger')()");
-                    // doCheck(++a)
-                    document.body.innerHTML =
-                        "检测到非法调试,请关闭后刷新重试!";
+
+            //================================================================
+            /* (() => {
+                function doCheck(a) {
+                    if (
+                        window.outerHeight - window.innerHeight > 200 ||
+                        window.outerWidth - window.innerWidth > 200
+                    ) {
+                        // Function("debugger")()
+                        // eval("Function('debugger')()");
+                        // doCheck(++a)
+                        document.body.innerHTML =
+                            "检测到非法调试,请关闭后刷新重试!";
+                    }
+                    setInterval(() => {
+                        // debugger;
+                        Function("debugger")();
+                    }, 50);
                 }
-                setInterval(() => {
-                    // debugger;
-                    Function("debugger")();
-                }, 50);
+                try {
+                    doCheck(0);
+                } catch (err) {}
+            })(); */
+            //================================================================
+            /* 去除无限debugger */
+            /* Function.prototype.__constructor_back = Function.prototype.constructor;
+    Function.prototype.constructor = function () {
+        if (arguments && typeof arguments[0] === "string") {
+            //alert("new function: "+ arguments[0]);
+            if ("debugger" === arguments[0]) {
+                //arguments[0]="console.log(\"anti debugger\");";
+                //arguments[0]=";";
+                return;
             }
-            try {
-                doCheck(0);
-            } catch (err) {}
-        })(); */
+        }
+        return Function.prototype.__constructor_back.apply(this, arguments);
+    }; */
             //================================================================
             /* document.onkeydown = function () {
             if ((e.ctrlKey) && (e.keyCode == 83)) {
