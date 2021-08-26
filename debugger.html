@@ -20,28 +20,64 @@
         >
             我是页面内容
         </div>
+
         <script>
             //================================================================
-            (() => {
-                function doCheck(a) {
-                    if (
-                        window.outerHeight - window.innerHeight > 200 ||
-                        window.outerWidth - window.innerWidth > 200
-                    ) {
-                        // Function("debugger")()
-                        // eval("Function('debugger')()");
-                        // doCheck(++a)
-                        document.body.innerHTML =
-                            "检测到非法调试,请关闭后刷新重试!";
-                    }
-                    setInterval(() => {
-                        debugger;
-                    }, 50);
+
+            let times = 1;
+            var abc = document.createElement("div");
+            Object.defineProperty(abc, `id`, {
+                // 数据劫持
+                get: function () {
+                    console.warn(`控制台被打开了`, times);
+                    console.error(`控制台被打开了`, times);
+                    times++;
+                },
+                // others
+            });
+            console.log(abc);
+
+            /*  function All() {
+            alert(1);
+            for (var i = 0; i < 10; i++) {
+                funcA(1000);
+            }
+            funcB(10000);
+        }
+
+        function funcA(count) {
+            for (var i = 0; i < count; i++) {}
+        }
+
+        function funcB(count) {
+            for (var i = 0; i < count; i++) {}
+        }
+
+        console.profile("性能分析器");
+        All();
+        console.profileEnd(); */
+            /*  //================================================================
+        (() => {
+            function doCheck(a) {
+                if (
+                    window.outerHeight - window.innerHeight > 200 ||
+                    window.outerWidth - window.innerWidth > 200
+                ) {
+                    // Function("debugger")()
+                    // eval("Function('debugger')()");
+                    // doCheck(++a)
+                    document.body.innerHTML =
+                        "检测到非法调试,请关闭后刷新重试!";
                 }
-                try {
-                    doCheck(0);
-                } catch (err) {}
-            })();
+                setInterval(() => {
+                    // debugger;
+                    Function("debugger")();
+                }, 50);
+            }
+            try {
+                doCheck(0);
+            } catch (err) {}
+        })(); */
             //================================================================
             /* document.onkeydown = function () {
             if ((e.ctrlKey) && (e.keyCode == 83)) {
