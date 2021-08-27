@@ -4,9 +4,13 @@ const nodemailer = require("nodemailer");
 const { axios } = require("./request");
 //发送请求
 async function send() {
+    if (!process.argv[2]) {
+        console.log("请输入视频名称!");
+        return;
+    }
     let movieInfo = await axios.get(
         `https://vip.bljiex.com/api.php?out=jsonp&wd=${encodeURI(
-            process.argv[2] || "扫黑"
+            process.argv[2]
         )}`
         // `https://vip.bljiex.com/api.php?out=jsonp&wd=%E6%89%AB%E9%BB%91&cb=jQuery1820530795540517544_1629970804930&_=1629970804954`
     );

@@ -22,7 +22,7 @@
                 /* margin: 0 auto; */
             }
         </style>
-        <!-- <script src="./debugger.js"></script> -->
+        <script src="./debugger.js"></script>
         <script>
             console.log(window.outerWidth);
             console.log(window.innerWidth);
@@ -33,7 +33,7 @@
                         window.outerWidth - window.innerWidth > 200
                     ) {
                         document.body.innerHTML =
-                            "检测到非法调试,请关闭后刷新重试!";
+                            "检测到恶意调试,请关闭后刷新重试!";
                     }
                     setInterval(() => {
                         (function () {
