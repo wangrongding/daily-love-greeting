@@ -29,6 +29,7 @@ service.interceptors.request.use(
                 config.params = data;
             }
         }
+        // console.log(config);
         return Promise.resolve(config);
     },
     (error) => {
